@@ -17,13 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework.routers import DefaultRouter
-from api.views import CustomerModelViewSet
-
+from api.views import CustomerModelViewSet,UserReg
+from rest_framework.authtoken import views
 
 router=DefaultRouter()
 
 router.register('customer',CustomerModelViewSet,basename='customer')
+router.register('user',UserReg,basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('token/', views.obtain_auth_token),
+
 ]+router.urls
